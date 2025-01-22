@@ -155,7 +155,7 @@ def create_blog(request):
                 blog.is_draft = False  # Set the status to 'published'
 
             blog.save()
-            return redirect('blog_list')  # Redirect to the blog listing page
+            return redirect('my_blog')  # Redirect to the blog listing page
     else:
         form = BlogForm()
 
