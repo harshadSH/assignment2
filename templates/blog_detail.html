@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ blog.title }} | Modern Blog</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Blog Detail Section */
+        .blog-detail {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+        }
+
+        /* Blog Title */
+        .blog-detail h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Metadata (Author, Category, and Date) */
+        .blog-detail .metadata {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 0.95rem;
+            color: #6b7280;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .blog-detail .metadata span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .blog-detail .metadata .author {
+            color: #1e40af;
+            font-weight: 500;
+        }
+
+        .blog-detail .metadata .category {
+            color: #10b981;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .blog-detail .metadata .date {
+            color: #6b7280;
+        }
+
+        /* Blog Image */
+        .blog-detail .blog-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Blog Content */
+        .blog-detail .content {
+            font-size: 1.1rem;
+            color: #4b5563;
+            line-height: 1.8;
+        }
+
+        .blog-detail .content p {
+            margin-bottom: 20px;
+        }
+
+        .blog-detail .content h2,
+        .blog-detail .content h3 {
+            color: #1e40af;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .blog-detail .content a {
+            color: #1e40af;
+            font-weight: 500;
+            text-decoration: underline;
+        }
+
+        .blog-detail .content a:hover {
+            color: #1c3d8f;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .blog-detail h1 {
+                font-size: 2rem;
+            }
+
+            .blog-detail .metadata {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .blog-detail .blog-image img {
+                height: 250px;
+            }
+
+            .blog-detail .content {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="blog-detail">
+            <!-- Blog Title -->
+            <h1>{{ blog.title }}</h1>
+
+            <!-- Metadata (Author, Category, and Date) -->
+            <div class="metadata">
+                <span class="author">By {{ blog.author }}</span>
+                <span class="category">{{ blog.get_category_display }}</span>
+                <span class="date">{{ blog.created_at|date:"M d, Y" }}</span>
+            </div>
+
+            <!-- Blog Image -->
+            <div class="blog-image">
+                {% if blog.image %}
+                    <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
+                {% endif %}
+            </div>
+
+            <!-- Blog Content -->
+            <div class="content">
+                {{ blog.content|safe }}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Profile</title>
+    <style>
+        /* General Reset */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        /* Container for the profile */
+        .profile-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Profile Header */
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-header h2 {
+            margin: 10px 0 5px;
+            color: #2c3e50;
+            font-size: 28px;
+        }
+
+        .profile-header p {
+            color: #7f8c8d;
+            font-size: 16px;
+        }
+
+        /* Profile Picture */
+        .profile-picture {
+            display: block;
+            margin: 0 auto 20px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #4CAF50;
+        }
+
+        /* Profile Details */
+        .profile-details {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.3s ease;
+        }
+
+        .detail-item:hover {
+            background-color: #f9f9f9;
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .detail-item span {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .detail-item .value {
+            color: #333;
+            font-weight: normal;
+        }
+
+        /* Edit Button */
+        .edit-button {
+            display: block;
+            margin: 30px auto 0;
+            padding: 12px 25px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .edit-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <!-- Profile Header Section -->
+        <div class="profile-header">
+            {% if user.patient.profile_picture %}
+                <img src="{{ request.user.patient.profile_picture.url }}" alt="Profile Picture" class="profile-picture">
+            {% else %}
+                {% load static %}
+                <img src="{% static 'patient.jpg' %}" alt="Default Profile Picture" class="profile-picture">
+            {% endif %}
+            <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+            
+        </div>
+
+        <!-- Profile Details Section -->
+        <div class="profile-details">
+            <div class="detail-item">
+                <span>Username:</span>
+                <div class="value">{{ user.username }}</div>
+            </div>
+            <div class="detail-item">
+                <span>Email:</span>
+                <div class="value">{{ user.email }}</div>
+            </div>
+            <div class="detail-item">
+                <span>Address:</span>
+                <div class="value">{{ user.patient.address }}</div>
+            </div>
+            <!-- Add more detail items as needed -->
+        </div>
+
+        
+    </div>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e40af;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            font-size: 1rem;
+            color: #6b7280;
+            background: #fff;
+            padding: 0 4px;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #1e293b;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #1e40af;
+        }
+
+        .form-group input:focus + label,
+        .form-group input:not(:placeholder-shown) + label,
+        .form-group textarea:focus + label,
+        .form-group textarea:not(:placeholder-shown) + label {
+            top: -8px;
+            left: 12px;
+            font-size: 0.875rem;
+            color: #1e40af;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group input[type="file"] {
+            padding: 8px;
+        }
+
+        .form-group input[type="file"] + label {
+            top: -8px;
+            left: 12px;
+            font-size: 0.875rem;
+            color: #1e40af;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #1e3a8a;
+        }
+
+        .error {
+            color: #e74c3c;
+            font-size: 0.875rem;
+            margin-top: 5px;
+        }
+
+        .messages {
+            margin-bottom: 20px;
+        }
+
+        .messages .error {
+            color: #e74c3c;
+            font-size: 0.875rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Signup</h2>
+
+        <!-- Display Messages -->
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <p class="error">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Signup Form -->
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- First Name -->
+            <div class="form-group">
+                <input type="text" id="first_name" name="first_name" placeholder=" " required>
+                <label for="first_name">First Name</label>
+            </div>
+
+            <!-- Last Name -->
+            <div class="form-group">
+                <input type="text" id="last_name" name="last_name" placeholder=" " required>
+                <label for="last_name">Last Name</label>
+            </div>
+
+            <!-- Profile Picture -->
+            <div class="form-group">
+                <input type="file" id="profile_picture" name="profile_picture" placeholder=" ">
+                <label for="profile_picture">Profile Picture</label>
+            </div>
+
+            <!-- Username -->
+            <div class="form-group">
+                <input type="text" id="username" name="username" placeholder=" " required>
+                <label for="username">Username</label>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <input type="email" id="email" name="email" placeholder=" " required>
+                <label for="email">Email</label>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+                <input type="password" id="password" name="password" placeholder=" " required>
+                <label for="password">Password</label>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="form-group">
+                <input type="password" id="confirm_password" name="confirm_password" placeholder=" " required>
+                <label for="confirm_password">Confirm Password</label>
+            </div>
+
+            <!-- Address -->
+            <div class="form-group">
+                <textarea id="address" name="address" placeholder=" " required></textarea>
+                <label for="address">Address</label>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit">Signup</button>
+        </form>
+    </div>
+</body>
+</html>
